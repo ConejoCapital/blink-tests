@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
   // Get all supported tokens for dynamic selection
   const allTokens = getAllTokens();
   
-  // Create action buttons - prioritize preset amounts
+  // Create action buttons - ONLY presets + 1 custom field
   const popularActions = [
     // Preset amounts for current token pair (top priority)
     {
@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
       label: `Swap 1 ${inputToken.symbol} → ${outputToken.symbol}`,
       href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=1`,
     },
-    // Custom amount for current token pair
+    // Custom amount for current token pair ONLY
     {
       label: `Custom ${inputToken.symbol} → ${outputToken.symbol}`,
       href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount={amount}`,
@@ -39,31 +39,6 @@ export async function GET(request: NextRequest) {
         {
           name: 'amount',
           label: `${inputToken.symbol} Amount`,
-          required: true,
-          type: 'number' as const,
-        },
-      ],
-    },
-    // Different token pair option
-    {
-      label: 'Different Token Pair',
-      href: `/api/actions/dynamic-swap?inputMint={inputMint}&outputMint={outputMint}&amount={amount}`,
-      parameters: [
-        {
-          name: 'inputMint',
-          label: 'Input Token Mint Address',
-          required: true,
-          type: 'text' as const,
-        },
-        {
-          name: 'outputMint',
-          label: 'Output Token Mint Address',
-          required: true,
-          type: 'text' as const,
-        },
-        {
-          name: 'amount',
-          label: 'Token Amount',
           required: true,
           type: 'number' as const,
         },
