@@ -67,8 +67,19 @@ export async function POST(request: NextRequest) {
     // Extract parameters
     const inputMint = url.searchParams.get('inputMint') || DEFAULT_INPUT_TOKEN.mint;
     const outputMint = url.searchParams.get('outputMint') || DEFAULT_OUTPUT_TOKEN.mint;
-    const amountParam = url.searchParams.get('amount') || body.amount;
+    // For custom amounts, the amount comes in the request body, not URL params
+    const amountParam = body.amount || url.searchParams.get('amount');
     const userPublicKey = body.account;
+
+    // Log for debugging
+    console.log('Swap request:', {
+      inputMint,
+      outputMint,
+      amountParam,
+      userPublicKey: userPublicKey ? 'present' : 'missing',
+      body: body,
+      urlParams: Object.fromEntries(url.searchParams)
+    });
 
     // Validate required parameters
     if (!userPublicKey) {
@@ -115,6 +126,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create swap using Jupiter
+    console.log(`Creating swap: ${amount} ${inputToken.symbol} -> ${outputToken.symbol}`);
     const { quote, transaction } = await JupiterAPI.createSwap({
       inputMint,
       outputMint,
@@ -122,6 +134,7 @@ export async function POST(request: NextRequest) {
       slippageBps: 50, // 0.5% slippage
       userPublicKey,
     });
+    console.log('Swap created successfully');
 
     // Calculate output amount for display
     const outputAmount = fromTokenAmount(
