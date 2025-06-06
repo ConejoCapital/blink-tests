@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
         },
         {
           label: 'Custom Amount',
-          href: `/api/actions/swap?inputMint=${inputMint}&outputMint=${outputMint}`,
+          href: `/api/actions/swap?inputMint=${inputMint}&outputMint=${outputMint}&amount={amount}`,
           parameters: [
             {
               name: 'amount',
@@ -84,7 +84,8 @@ export async function POST(request: NextRequest) {
     // Extract parameters
     const inputMint = url.searchParams.get('inputMint') || DEFAULT_INPUT_TOKEN.mint;
     const outputMint = url.searchParams.get('outputMint') || DEFAULT_OUTPUT_TOKEN.mint;
-    // For custom amounts, the amount comes in the request body, not URL params
+    // For custom amounts, the amount comes in the request body
+    // For preset amounts, the amount comes from URL params
     const amountParam = body.amount || url.searchParams.get('amount');
     const userPublicKey = body.account;
 
