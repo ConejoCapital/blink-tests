@@ -16,7 +16,16 @@ export async function GET(request: NextRequest) {
   if (!inputToken || !outputToken) {
     return NextResponse.json(
       { error: 'Invalid token pair' },
-      { status: 400 }
+      { 
+        status: 400,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept-Encoding',
+          'X-Action-Version': '2.1.3',
+          'X-Blockchain-Ids': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+        }
+      }
     );
   }
 
@@ -55,7 +64,15 @@ export async function GET(request: NextRequest) {
     },
   };
 
-  return NextResponse.json(response);
+  return NextResponse.json(response, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept-Encoding',
+      'X-Action-Version': '2.1.3',
+      'X-Blockchain-Ids': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+    },
+  });
 }
 
 // POST request - Create and return the swap transaction
@@ -85,14 +102,32 @@ export async function POST(request: NextRequest) {
     if (!userPublicKey) {
       return NextResponse.json(
         { error: 'Missing user public key' },
-        { status: 400 }
+        { 
+          status: 400,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept-Encoding',
+            'X-Action-Version': '2.1.3',
+            'X-Blockchain-Ids': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+          }
+        }
       );
     }
 
     if (!amountParam) {
       return NextResponse.json(
         { error: 'Missing swap amount' },
-        { status: 400 }
+        { 
+          status: 400,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept-Encoding',
+            'X-Action-Version': '2.1.3',
+            'X-Blockchain-Ids': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+          }
+        }
       );
     }
 
@@ -100,7 +135,16 @@ export async function POST(request: NextRequest) {
     if (isNaN(amount) || amount <= 0) {
       return NextResponse.json(
         { error: 'Invalid swap amount' },
-        { status: 400 }
+        { 
+          status: 400,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept-Encoding',
+            'X-Action-Version': '2.1.3',
+            'X-Blockchain-Ids': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+          }
+        }
       );
     }
 
@@ -110,7 +154,16 @@ export async function POST(request: NextRequest) {
     } catch {
       return NextResponse.json(
         { error: 'Invalid user public key' },
-        { status: 400 }
+        { 
+          status: 400,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept-Encoding',
+            'X-Action-Version': '2.1.3',
+            'X-Blockchain-Ids': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+          }
+        }
       );
     }
 
@@ -121,7 +174,16 @@ export async function POST(request: NextRequest) {
     if (!inputToken || !outputToken) {
       return NextResponse.json(
         { error: 'Invalid token pair' },
-        { status: 400 }
+        { 
+          status: 400,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept-Encoding',
+            'X-Action-Version': '2.1.3',
+            'X-Blockchain-Ids': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+          }
+        }
       );
     }
 
@@ -157,7 +219,15 @@ export async function POST(request: NextRequest) {
       message,
     };
 
-    return NextResponse.json(response);
+    return NextResponse.json(response, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept-Encoding',
+        'X-Action-Version': '2.1.3',
+        'X-Blockchain-Ids': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+      },
+    });
 
   } catch (err) {
     console.error('Swap action error:', err);
@@ -166,7 +236,16 @@ export async function POST(request: NextRequest) {
     
     return NextResponse.json(
       { error: `Swap failed: ${errorMessage}` },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept-Encoding',
+          'X-Action-Version': '2.1.3',
+          'X-Blockchain-Ids': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+        }
+      }
     );
   }
 }
@@ -178,7 +257,9 @@ export async function OPTIONS() {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, Accept-Encoding',
+      'X-Action-Version': '2.1.3',
+      'X-Blockchain-Ids': 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
     },
   });
 } 
