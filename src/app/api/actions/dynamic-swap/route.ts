@@ -18,8 +18,35 @@ export async function GET(request: NextRequest) {
   
   // Create action buttons for popular tokens when swapping from SOL
   const popularActions = inputMint === TOKENS.SOL.mint ? [
+    // Preset amounts for current token pair
     {
-      label: `SOL → FARTCOIN`,
+      label: `Swap 0.1 ${inputToken.symbol} → ${outputToken.symbol}`,
+      href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=0.1`,
+    },
+    {
+      label: `Swap 0.5 ${inputToken.symbol} → ${outputToken.symbol}`,
+      href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=0.5`,
+    },
+    {
+      label: `Swap 1 ${inputToken.symbol} → ${outputToken.symbol}`,
+      href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=1`,
+    },
+    // Custom amount for current token pair
+    {
+      label: `Custom ${inputToken.symbol} → ${outputToken.symbol}`,
+      href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount={amount}`,
+      parameters: [
+        {
+          name: 'amount',
+          label: `${inputToken.symbol} Amount`,
+          required: true,
+          type: 'number' as const,
+        },
+      ],
+    },
+    // Quick popular token swaps
+    {
+      label: `Quick: SOL → FARTCOIN`,
       href: `/api/actions/dynamic-swap?inputMint=${TOKENS.SOL.mint}&outputMint=${TOKENS.FARTCOIN.mint}&amount={amount}`,
       parameters: [
         {
@@ -31,7 +58,7 @@ export async function GET(request: NextRequest) {
       ],
     },
     {
-      label: `SOL → WIF`,
+      label: `Quick: SOL → WIF`,
       href: `/api/actions/dynamic-swap?inputMint=${TOKENS.SOL.mint}&outputMint=${TOKENS.WIF.mint}&amount={amount}`,
       parameters: [
         {
@@ -43,43 +70,7 @@ export async function GET(request: NextRequest) {
       ],
     },
     {
-      label: `SOL → BONK`,
-      href: `/api/actions/dynamic-swap?inputMint=${TOKENS.SOL.mint}&outputMint=${TOKENS.BONK.mint}&amount={amount}`,
-      parameters: [
-        {
-          name: 'amount',
-          label: 'SOL Amount',
-          required: true,
-          type: 'number' as const,
-        },
-      ],
-    },
-    {
-      label: `SOL → PEPE`,
-      href: `/api/actions/dynamic-swap?inputMint=${TOKENS.SOL.mint}&outputMint=${TOKENS.PEPE.mint}&amount={amount}`,
-      parameters: [
-        {
-          name: 'amount',
-          label: 'SOL Amount',
-          required: true,
-          type: 'number' as const,
-        },
-      ],
-    },
-    {
-      label: `SOL → TRUMP`,
-      href: `/api/actions/dynamic-swap?inputMint=${TOKENS.SOL.mint}&outputMint=${TOKENS.TRUMP.mint}&amount={amount}`,
-      parameters: [
-        {
-          name: 'amount',
-          label: 'SOL Amount',
-          required: true,
-          type: 'number' as const,
-        },
-      ],
-    },
-    {
-      label: 'Custom Token Swap',
+      label: 'Different Token Pair',
       href: `/api/actions/dynamic-swap?inputMint={inputMint}&outputMint={outputMint}&amount={amount}`,
       parameters: [
         {
@@ -103,8 +94,22 @@ export async function GET(request: NextRequest) {
       ],
     },
   ] : [
+    // Preset amounts for current token pair
     {
-      label: `${inputToken.symbol} → ${outputToken.symbol}`,
+      label: `Swap 0.1 ${inputToken.symbol} → ${outputToken.symbol}`,
+      href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=0.1`,
+    },
+    {
+      label: `Swap 0.5 ${inputToken.symbol} → ${outputToken.symbol}`,
+      href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=0.5`,
+    },
+    {
+      label: `Swap 1 ${inputToken.symbol} → ${outputToken.symbol}`,
+      href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=1`,
+    },
+    // Custom amount for current token pair
+    {
+      label: `Custom ${inputToken.symbol} → ${outputToken.symbol}`,
       href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount={amount}`,
       parameters: [
         {
