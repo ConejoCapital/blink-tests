@@ -13,6 +13,16 @@ export async function GET() {
         pathPattern: '/api/actions/swap/**',
         apiPath: '/api/actions/swap/**',
       },
+      // Dynamic swap action - NEW!
+      {
+        pathPattern: '/api/actions/dynamic-swap',
+        apiPath: '/api/actions/dynamic-swap',
+      },
+      // Dynamic swap with parameters
+      {
+        pathPattern: '/api/actions/dynamic-swap/**',
+        apiPath: '/api/actions/dynamic-swap/**',
+      },
       // Support for direct swap links
       {
         pathPattern: '/swap',
@@ -21,6 +31,15 @@ export async function GET() {
       {
         pathPattern: '/swap/**',
         apiPath: '/api/actions/swap/**',
+      },
+      // Dynamic swap direct links
+      {
+        pathPattern: '/dynamic-swap',
+        apiPath: '/api/actions/dynamic-swap',
+      },
+      {
+        pathPattern: '/dynamic-swap/**',
+        apiPath: '/api/actions/dynamic-swap/**',
       },
     ],
   };
