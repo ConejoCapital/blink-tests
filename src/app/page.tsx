@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { TOKENS } from '@/lib/tokens';
 
 export default function Home() {
@@ -13,7 +12,7 @@ export default function Home() {
             Jupiter Swap Blink
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Swap tokens directly from anywhere on the web using Jupiter's best routes.
+            Swap tokens directly from anywhere on the web using Jupiter&apos;s best routes.
             Share these links on social media, Discord, or any platform that supports Blinks!
           </p>
         </div>
@@ -25,7 +24,7 @@ export default function Home() {
                 🔄 SOL → USDC Swap
               </h2>
               <p className="text-gray-300 mb-4">
-                Swap Solana (SOL) for USD Coin (USDC) using Jupiter's aggregated liquidity.
+                Swap Solana (SOL) for USD Coin (USDC) using Jupiter&apos;s aggregated liquidity.
               </p>
               <div className="space-y-2">
                 <p className="text-sm text-gray-400">Blink URL:</p>
@@ -40,7 +39,7 @@ export default function Home() {
                 💰 USDC → SOL Swap
               </h2>
               <p className="text-gray-300 mb-4">
-                Swap USD Coin (USDC) for Solana (SOL) using Jupiter's best prices.
+                Swap USD Coin (USDC) for Solana (SOL) using Jupiter&apos;s best prices.
               </p>
               <div className="space-y-2">
                 <p className="text-sm text-gray-400">Blink URL:</p>
@@ -83,7 +82,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-2">3. Instant Swap</h3>
                 <p className="text-gray-300">
-                  Users can swap tokens directly without leaving the platform they're on.
+                  Users can swap tokens directly without leaving the platform they&apos;re on.
                 </p>
               </div>
             </div>
@@ -93,7 +92,7 @@ export default function Home() {
             <div className="bg-yellow-500/20 border border-yellow-500/50 rounded-lg p-4 mb-6">
               <p className="text-yellow-200">
                 <strong>Note:</strong> This Blink requires a Solana wallet extension like Phantom, Backpack, or Solflare to function.
-                Make sure you're on Solana mainnet to test real swaps.
+                Make sure you&apos;re on Solana mainnet to test real swaps.
               </p>
             </div>
 
@@ -103,6 +102,7 @@ export default function Home() {
                 {Object.values(TOKENS).map((token) => (
                   <div key={token.symbol} className="flex items-center space-x-2 bg-white/10 rounded-full px-4 py-2">
                     {token.logoURI && (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img src={token.logoURI} alt={token.symbol} className="w-6 h-6 rounded-full" />
                     )}
                     <span className="text-white font-medium">{token.symbol}</span>

@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
     // Validate public key
     try {
       new PublicKey(userPublicKey);
-    } catch (error) {
+    } catch {
       return NextResponse.json(
         { error: 'Invalid user public key' },
         { status: 400 }
@@ -146,10 +146,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(response);
 
-  } catch (error) {
-    console.error('Swap action error:', error);
+  } catch (err) {
+    console.error('Swap action error:', err);
     
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
     
     return NextResponse.json(
       { error: `Swap failed: ${errorMessage}` },

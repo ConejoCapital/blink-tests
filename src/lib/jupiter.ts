@@ -103,7 +103,7 @@ export class JupiterAPI {
   /**
    * Get supported tokens from Jupiter
    */
-  static async getSupportedTokens(): Promise<any[]> {
+  static async getSupportedTokens(): Promise<unknown[]> {
     const response = await fetch(`${JUPITER_API_BASE}/tokens`);
     
     if (!response.ok) {
