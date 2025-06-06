@@ -16,24 +16,24 @@ export async function GET(request: NextRequest) {
   // Get all supported tokens for dynamic selection
   const allTokens = getAllTokens();
   
-  // Create action buttons - ONLY presets + 1 custom field
+  // Create action buttons - Clean layout like USDC → SOL
   const popularActions = [
-    // Preset amounts for current token pair (top priority)
+    // Preset amounts with clean labels (just show input amount)
     {
-      label: `Swap 0.1 ${inputToken.symbol} → ${outputToken.symbol}`,
+      label: `Swap 0.1 ${inputToken.symbol}`,
       href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=0.1`,
     },
     {
-      label: `Swap 0.5 ${inputToken.symbol} → ${outputToken.symbol}`,
+      label: `Swap 0.5 ${inputToken.symbol}`,
       href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=0.5`,
     },
     {
-      label: `Swap 1 ${inputToken.symbol} → ${outputToken.symbol}`,
+      label: `Swap 1 ${inputToken.symbol}`,
       href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=1`,
     },
-    // Custom amount for current token pair ONLY
+    // Custom amount with clean label
     {
-      label: `Custom ${inputToken.symbol} → ${outputToken.symbol}`,
+      label: `Custom Amount`,
       href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount={amount}`,
       parameters: [
         {
@@ -47,9 +47,9 @@ export async function GET(request: NextRequest) {
   ];
 
   const response: ActionGetResponse = {
-    title: `Dynamic Token Swap: ${inputToken.symbol} → ${outputToken.symbol}`,
+    title: `Swap ${inputToken.symbol} to ${outputToken.symbol}`,
     icon: inputToken.logoURI || 'https://static.jup.ag/jup/icon.png',
-    description: `Swap any token using Jupiter's best routes. Currently configured for ${inputToken.symbol} to ${outputToken.symbol}. Supports ${allTokens.length}+ tokens including FARTCOIN, WIF, BONK, PEPE, TRUMP and more!`,
+    description: `Swap ${inputToken.symbol} for ${outputToken.symbol} using Jupiter's best routes`,
     label: 'Dynamic Swap',
     links: {
       actions: popularActions,
