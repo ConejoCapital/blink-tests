@@ -16,9 +16,9 @@ export async function GET(request: NextRequest) {
   // Get all supported tokens for dynamic selection
   const allTokens = getAllTokens();
   
-  // Create action buttons for popular tokens when swapping from SOL
-  const popularActions = inputMint === TOKENS.SOL.mint ? [
-    // Preset amounts for current token pair
+  // Create action buttons - prioritize preset amounts
+  const popularActions = [
+    // Preset amounts for current token pair (top priority)
     {
       label: `Swap 0.1 ${inputToken.symbol} → ${outputToken.symbol}`,
       href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=0.1`,
@@ -44,82 +44,7 @@ export async function GET(request: NextRequest) {
         },
       ],
     },
-    // Quick popular token swaps
-    {
-      label: `Quick: SOL → FARTCOIN`,
-      href: `/api/actions/dynamic-swap?inputMint=${TOKENS.SOL.mint}&outputMint=${TOKENS.FARTCOIN.mint}&amount={amount}`,
-      parameters: [
-        {
-          name: 'amount',
-          label: 'SOL Amount',
-          required: true,
-          type: 'number' as const,
-        },
-      ],
-    },
-    {
-      label: `Quick: SOL → WIF`,
-      href: `/api/actions/dynamic-swap?inputMint=${TOKENS.SOL.mint}&outputMint=${TOKENS.WIF.mint}&amount={amount}`,
-      parameters: [
-        {
-          name: 'amount',
-          label: 'SOL Amount',
-          required: true,
-          type: 'number' as const,
-        },
-      ],
-    },
-    {
-      label: 'Different Token Pair',
-      href: `/api/actions/dynamic-swap?inputMint={inputMint}&outputMint={outputMint}&amount={amount}`,
-      parameters: [
-        {
-          name: 'inputMint',
-          label: 'Input Token Mint Address',
-          required: true,
-          type: 'text' as const,
-        },
-        {
-          name: 'outputMint',
-          label: 'Output Token Mint Address',
-          required: true,
-          type: 'text' as const,
-        },
-        {
-          name: 'amount',
-          label: 'Token Amount',
-          required: true,
-          type: 'number' as const,
-        },
-      ],
-    },
-  ] : [
-    // Preset amounts for current token pair
-    {
-      label: `Swap 0.1 ${inputToken.symbol} → ${outputToken.symbol}`,
-      href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=0.1`,
-    },
-    {
-      label: `Swap 0.5 ${inputToken.symbol} → ${outputToken.symbol}`,
-      href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=0.5`,
-    },
-    {
-      label: `Swap 1 ${inputToken.symbol} → ${outputToken.symbol}`,
-      href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount=1`,
-    },
-    // Custom amount for current token pair
-    {
-      label: `Custom ${inputToken.symbol} → ${outputToken.symbol}`,
-      href: `/api/actions/dynamic-swap?inputMint=${inputMint}&outputMint=${outputMint}&amount={amount}`,
-      parameters: [
-        {
-          name: 'amount',
-          label: `${inputToken.symbol} Amount`,
-          required: true,
-          type: 'number' as const,
-        },
-      ],
-    },
+    // Different token pair option
     {
       label: 'Different Token Pair',
       href: `/api/actions/dynamic-swap?inputMint={inputMint}&outputMint={outputMint}&amount={amount}`,
