@@ -1,6 +1,7 @@
 import { TOKENS } from '@/lib/tokens';
 
 export default function Home() {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://blink-test-three.vercel.app';
   const solToUsdcLink = `/api/actions/swap?inputMint=${TOKENS.SOL.mint}&outputMint=${TOKENS.USDC.mint}`;
   const usdcToSolLink = `/api/actions/swap?inputMint=${TOKENS.USDC.mint}&outputMint=${TOKENS.SOL.mint}`;
 
@@ -29,7 +30,7 @@ export default function Home() {
               <div className="space-y-2">
                 <p className="text-sm text-gray-400">Blink URL:</p>
                 <div className="bg-black/30 rounded-lg p-3 text-sm text-green-400 font-mono break-all">
-                  {`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}${solToUsdcLink}`}
+                  {`${baseUrl}${solToUsdcLink}`}
                 </div>
               </div>
             </div>
@@ -44,7 +45,7 @@ export default function Home() {
               <div className="space-y-2">
                 <p className="text-sm text-gray-400">Blink URL:</p>
                 <div className="bg-black/30 rounded-lg p-3 text-sm text-green-400 font-mono break-all">
-                  {`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}${usdcToSolLink}`}
+                  {`${baseUrl}${usdcToSolLink}`}
                 </div>
               </div>
             </div>
